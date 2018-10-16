@@ -58,7 +58,6 @@ public class DBController extends SQLiteOpenHelper {
     //Creates Table
     @Override
     public void onCreate(SQLiteDatabase database) {
-        Fn.logD("DBController_onCreate", "onCreate");
         try {
             database.execSQL(CREATE_TABLE_VIEW_FARE_CHART);
 //            database.close();
@@ -68,7 +67,6 @@ public class DBController extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase database, int version_old, int current_version) {
-        Fn.logD("DBController_onUpgrade","onUpgrade");
         try {
             database.execSQL(DELETE_VIEW_FARE_CHART);
         } catch (SQLException e) {
@@ -78,7 +76,6 @@ public class DBController extends SQLiteOpenHelper {
     }
     public void createTable()
     {
-        Fn.logD("DBController_createTable","createTable");
         try {
             SQLiteDatabase database = this.getWritableDatabase();
             database.execSQL(CREATE_TABLE_VIEW_FARE_CHART);
@@ -87,7 +84,6 @@ public class DBController extends SQLiteOpenHelper {
         }
     }
     public void deleteTable() {
-        Fn.logD("DBController_deleteTable","deleteTable");
         try {
             SQLiteDatabase database = this.getWritableDatabase();
             database.execSQL(DELETE + TABLE_VIEW_FARE_CHART);
@@ -104,8 +100,6 @@ public class DBController extends SQLiteOpenHelper {
         try {
             SQLiteDatabase database = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            Fn.logD("DBController_insert", "insert");
-            Fn.logD("table_no", "1");
             values.put(CITY_ID, queryValues.get(CITY_ID));
             values.put(CITY_NAME, queryValues.get(CITY_NAME));
             values.put(CITY_LAT, queryValues.get(CITY_LAT));
@@ -120,37 +114,10 @@ public class DBController extends SQLiteOpenHelper {
             values.put(IS_ACTIVE, queryValues.get(IS_ACTIVE));
             values.put(UPDATE_DATE, queryValues.get(UPDATE_DATE));
             database.insert(TABLE_VIEW_FARE_CHART, null, values);
-//                database.close();
-//            database.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
-    /**
-     * Get list of Users from SQLite DB as Array List
-     * @return
-     */
-    public void getAll() throws ParseException {
-        try {
-            String selectQuery = "SELECT "+CITY_NAME  +", "+FARE+" FROM "+TABLE_VIEW_FARE_CHART;
-            SQLiteDatabase database = this.getWritableDatabase();
-            Cursor cursor = database.rawQuery(selectQuery, null);
-            Fn.logD("ArrayList", "ArrayList");
-            if (cursor.moveToFirst()) {
-                do {
-
-                    Fn.logD("onCreate",cursor.getString(0)+" "+cursor.getString(1));
-
-
-                } while (cursor.moveToNext());
-            }
-//            database.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }
 

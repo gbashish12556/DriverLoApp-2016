@@ -94,37 +94,27 @@ public class FetchAddressIntentService extends IntentService {
                     location.getLongitude(),
                     // In this sample, we get just a single address.
                     1);
-            Fn.logE("Im Address",addresses.toString());
-        } catch (IOException ioException) {
+         } catch (IOException ioException) {
             // Catch network or other I/O problems.
             errorMessage = getString(R.string.service_not_available);
-            Log.e(TAG, errorMessage, ioException);
         } catch (IllegalArgumentException illegalArgumentException) {
             // Catch invalid latitude or longitude values.
             errorMessage = getString(R.string.invalid_lat_long_used);
-            Log.e(TAG, errorMessage + ". " +
-                    "Latitude = " + location.getLatitude() +
-                    ", Longitude = " + location.getLongitude(), illegalArgumentException);
         }
 
         // Handle case where no address was found.
         if (addresses == null || addresses.size() == 0) {
             if (errorMessage.isEmpty()) {
                 errorMessage = getString(R.string.no_address_found);
-                Log.e(TAG, errorMessage);
-            }
+             }
             deliverResultToReceiver(AppUtils.LocationConstants.FAILURE_RESULT, errorMessage, null);
         } else {
             Address address = addresses.get(0);
             ArrayList<String> addressFragments = new ArrayList<String>();
-            Fn.logE("Address_0th",address.toString());
-//            Fn.logD("MaxAddressLineIndex",address.getMaxAddressLineIndex().to);
             for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                Fn.logE("ith_line",address.getAddressLine(i));
                 addressFragments.add(address.getAddressLine(i));
 
             }
-            Fn.logE("addressFragments",addressFragments.toString());
             deliverResultToReceiver(AppUtils.LocationConstants.SUCCESS_RESULT,
                     TextUtils.join(System.getProperty("line.separator"), addressFragments), address);
             //TextUtils.split(TextUtils.join(System.getProperty("line.separator"), addressFragments), System.getProperty("line.separator"));
@@ -137,15 +127,12 @@ public class FetchAddressIntentService extends IntentService {
      */
     private void deliverResultToReceiver(int resultCode, String message, Address address) {
         try {
-            Log.d("deliverResultToReceiver", "deliverResultToReceiver");
             Bundle bundle = new Bundle();
             bundle.putString(AppUtils.LocationConstants.RESULT_DATA_KEY, message);
-            Log.d("address_delivered", message);
             bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_AREA, address.getSubLocality());
             bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_CITY, address.getLocality());
             bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_EXTRA, address.getPostalCode());
             bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_STREET, address.getAddressLine(0));
-            Fn.logD("Sub Locality",address.getSubLocality());
             mReceiver.send(resultCode, bundle);
 
         } catch (Exception e) {

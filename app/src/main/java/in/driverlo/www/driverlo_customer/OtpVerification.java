@@ -35,7 +35,6 @@ public class OtpVerification extends AppCompatActivity {
     private Button otp_verify_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE", "onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
         otp_value = (EditText) findViewById(R.id.registration_otp);
@@ -58,42 +57,6 @@ public class OtpVerification extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE", "onRestart called");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE","onStart called");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE","onResume called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE","onPause called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE","onStop called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Fn.logW("OTP_PROFILE_ACTIVITY_LIFECYCLE","onDestroy called");
-    }
-
     public void verifyOtp(){
         if(checkValidation()) {
 //            Fn.showProgressDialog(Constants.Message.LOADING,this);
@@ -101,7 +64,6 @@ public class OtpVerification extends AppCompatActivity {
             if (OTP.equals(entered_otp)) {
                HashMap<String, String> hashMap = new HashMap<String, String>();
                String rating_url = Constants.Config.ROOT_PATH + "customer_registration";
-               Fn.logD("rating_url", rating_url);
                hashMap.put("signup_name", name);
                hashMap.put("signup_email", email);
                hashMap.put("signup_mobile_no", mobile_no);
@@ -132,7 +94,6 @@ public class OtpVerification extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Fn.logD("onErrorResponse", String.valueOf(error));
                 ErrorDialog(Constants.Title.NETWORK_ERROR,Constants.Message.NETWORK_ERROR);
             }
         }){
@@ -152,12 +113,10 @@ public class OtpVerification extends AppCompatActivity {
             if(errFlag.equals("0")){
                 if(jsonObject.has("likes")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("likes");
-                    Fn.logD("toastdone", "toastdone");
                     int count = 0;
                     while (count < jsonArray.length())
                     {
 
-                        Fn.logD("likes_entered", "likes_entered");
                         JSONObject JO = jsonArray.getJSONObject(count);
                         String customer_token = JO.getString(Constants.Keys.CUSTOMER_TOKEN);
                         String mobile_no = JO.getString(Constants.Keys.MOBILE_NO);

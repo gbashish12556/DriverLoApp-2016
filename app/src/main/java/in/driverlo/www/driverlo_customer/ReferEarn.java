@@ -60,7 +60,6 @@ public class ReferEarn extends Fragment {
             start_inviting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fn.SystemPrintLn("Sharing Via Facebook");
                     String referal_code = Fn.getPreference(getActivity(), Constants.Keys.REFERAL_CODE);
                     String app_link = Constants.Config.APP_LINK;
                     String send_text = "Download the App DriverLo " + app_link + " and enter code " + referal_code + " to earn 200 points";
@@ -89,13 +88,11 @@ public class ReferEarn extends Fragment {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Fn.logD("onResponse",response);
-                    PointReceiveSuccess(response);
+                     PointReceiveSuccess(response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Fn.logD("onErrorResponse", String.valueOf(error));
                     ErrorDialog(Constants.Title.NETWORK_ERROR,Constants.Message.NETWORK_ERROR);
                 }
             }) {
@@ -113,14 +110,11 @@ public class ReferEarn extends Fragment {
         try {
             jsonObject = new JSONObject(response);
             String errFlag = jsonObject.getString("errFlag");
-            if (errFlag.equals("1")) {
-                Fn.logD("toastNotdone", "toastNotdone");
-            } else if (errFlag.equals("0")) {
+            if (errFlag.equals("0")) {
                 if (jsonObject.has("likes")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("likes");
                     int count = 0;
                     while (count < jsonArray.length()) {
-                        Fn.logD("likes_entered", "likes_entered");
                         JSONObject JO = jsonArray.getJSONObject(count);
                         String total_point = JO.getString("total_point");
                         points_earned.setText("Points Earned: "+ total_point);

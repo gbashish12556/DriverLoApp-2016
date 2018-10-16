@@ -116,10 +116,7 @@ public class RatingDialog extends DialogFragment implements View.OnClickListener
 
     protected void handleResponse(String response) {
         if(getActivity() !=  null) {
-            Fn.logD("COMPLETED_RATING_FRAGMENT_LIFECYCLE", "rate_Driver Called");
             if (!Fn.CheckJsonError(response)) {
-//            Fn.logD("bookingStatusSuccess", "bookingStatusSuccess Called");
-                Fn.logD("received_json", response);
                 JSONObject jsonObject;
                 try {
                     jsonObject = new JSONObject(response);
@@ -136,16 +133,13 @@ public class RatingDialog extends DialogFragment implements View.OnClickListener
                         fragment.setArguments(Fn.CheckBundle(bundle));
                         FragmentManager fragmentManager = FullActivity.fragmentManager;
                         FragmentTransaction transaction = fragmentManager.beginTransaction();
-//                Fragment fragment = new BookNow();
                         transaction.replace(R.id.main_content, fragment, Constants.Config.CURRENT_FRAG_TAG);
                         if ((FullActivity.homeFragmentIndentifier == -5)) {
                             transaction.addToBackStack(null);
                             FullActivity.homeFragmentIndentifier = transaction.commit();
                         } else {
                             transaction.commit();
-                            Fn.logD("fragment instanceof Book", "homeidentifier != -1");
                         }
-//                        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_finished_booking_detail_fragment);
 
                     }
                 } catch (JSONException e) {

@@ -60,7 +60,6 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
     //    public FragmentTransaction transaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full);
         buildGoogleApiClient();
@@ -71,7 +70,6 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         int item = 0;
         if (fragment_title.equals("RideDetails")) {
-//              Fn.logD("BillDetails_fragement_called",fragment_title);
             item = 7;
         }
         fragmentManager = getSupportFragmentManager();
@@ -131,30 +129,9 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
                     .build();
     }
     @Override
-    public void onAttachFragment(android.support.v4.app.Fragment fragment) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "V4onAttachFragment called");
-        super.onAttachFragment(fragment);
-    }
-    @Override
-    public void onAttachFragment(android.app.Fragment fragment) {
-        super.onAttachFragment(fragment);
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onAttachFragment called");
-    }
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onRestart called");
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onStart called");
-    }
-    @Override
     protected void onResume() {
         super.onResume();
         mGoogleApiClient.connect();
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onResume called");
     }
     @Override
     protected void onPause() {
@@ -162,31 +139,12 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
         if(mGoogleApiClient.isConnected()){
             mGoogleApiClient.disconnect();
         }
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onPause called");
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onStop called");
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onSaveInstanceState called");
-    }
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onRestoreInstanceState called");
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onDestroy called");
     }
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onPostCreate called");
         super.onPostCreate(savedInstanceState);
         drawerListener.syncState();
     }
@@ -209,7 +167,6 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
                     FullActivity.homeFragmentIndentifier =  transaction.commit();
                 }else{
                     transaction.commit();
-                    Fn.logD("fragment instanceof Book","homeidentifier != -1");
                 }
                 getSupportActionBar().setTitle(getResources().getString(R.string.title_fragment_refer_earn));
             }
@@ -218,7 +175,6 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onOptionsItemSelected called");
         if(drawerListener.onOptionsItemSelected(item)){
             return true;
         }else{
@@ -227,14 +183,10 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onConfigurationChanged called");
-        //super.onConfigurationChanged(newConfig);
         drawerListener.onConfigurationChanged(newConfig);
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onItemClick called");
-//        Toast.makeText(this,planets[position],Toast.LENGTH_LONG).show();
         drawerLayout.closeDrawers();
         if(position==6){
             showLogoutDialog();
@@ -283,12 +235,10 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
         }*/
     }
     protected void logout(){
-        Fn.SystemPrintLn("**Before logout: "+Fn.getPreference(this,Constants.Keys.CUSTOMER_TOKEN));
         Fn.putPreference(this, Constants.Keys.CUSTOMER_TOKEN, "defaultStringIfNothingFound");
         Fn.putPreference(this, Constants.Keys.MOBILE_NO, null);
         Fn.putPreference(this, Constants.Keys.NAME, null);
         Fn.putPreference(this, Constants.Keys.REFERAL_CODE, null);
-        Fn.SystemPrintLn("##After logout: " + Fn.getPreference(this, "user_token"));
         fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag(Constants.Config.CURRENT_FRAG_TAG)).commit();
         Intent intent = new Intent(this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -297,7 +247,6 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
     public void selectItem(int position){
         setTitle(position);
         CurrentFrag = position;
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "selectItem called");
         // listView.setItemChecked(position,true);
         //FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();// For AppCompat use getSupportFragmentManager
@@ -329,7 +278,6 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         transaction.replace(R.id.main_content, fragment, Constants.Config.CURRENT_FRAG_TAG);
         if((homeFragmentIndentifier == -5)&&(!(fragment instanceof  HireDriver))){
-            Fn.logD("fragment instanceof Book","called with homeFragmentIndentifier = "+String.valueOf(homeFragmentIndentifier));
             if(method.equals("push")) {
                 transaction.commit();
                 method = "";
@@ -337,33 +285,27 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
                 transaction.addToBackStack(null);
                 homeFragmentIndentifier =  transaction.commit();
             }
-            Fn.logD("homeFragmentIndentifier value",String.valueOf(homeFragmentIndentifier));
         }else{
             transaction.commit();
-            Fn.logD("fragment instanceof Book","homeidentifier != -1");
         }
 
     }
     @Override
     public void onBackPressed() {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onBackPressed called");
         fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag(Constants.Config.CURRENT_FRAG_TAG)).commit();
         super.onBackPressed();
         if(homeFragmentIndentifier != -5) {
             getSupportActionBar().setTitle(R.string.title_hire_driver_fragment);
-            Fn.logD("homeFragmentIndentifier", String.valueOf(homeFragmentIndentifier));
             fragmentManager.popBackStack(homeFragmentIndentifier, 0);
         }
         homeFragmentIndentifier = -5;
     }
     public void setTitle(int position){
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "setTitle called");
         getSupportActionBar().setTitle(TitleList[position]);
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Fn.logW("FULL_ACTIVITY_LIFECYCLE", "onConnected called");
         if((fragment instanceof HireDriver)&&(intialConnect == 0)) {
             selectItem(0);
             intialConnect++;
@@ -384,7 +326,7 @@ public class FullActivity extends AppCompatActivity implements GoogleApiClient.C
                 e.printStackTrace();
             }
         } else {
-            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+//            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
         }
     }
     @Override

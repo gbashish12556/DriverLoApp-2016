@@ -90,14 +90,11 @@ public class SignupActivity extends AppCompatActivity {
              referal_code_text = referal_code.getText().toString();
              password = signup_password.getText().toString().trim();
             String confirm_password = confirm_signup_password.getText().toString().trim();
-            Fn.logD("password",password);
-            Fn.logD("confirm_password",confirm_password);
             if(confirm_password.equals(password)) {
                 String otp_url = Constants.Config.ROOT_PATH + "gen_registration_otp";
                 Fn.logD("otp_url",otp_url);
                 Random ran = new Random();
                 otp = (100000 + ran.nextInt(900000));
-                Fn.logD("OTP", String.valueOf(otp));
                 HashMap<String,String> hashMap = new HashMap<String, String>();
                 hashMap.put("signup_email", email);
                 hashMap.put("signup_mobile_no", mobile_no);
@@ -125,15 +122,12 @@ public class SignupActivity extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Fn.logD("onResponse",response);
                     String trimmed_response = response.substring(response.indexOf("{"));
-                    Fn.logD("trimmed_response", trimmed_response);
                     OtpGenerateSuccess(trimmed_response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Fn.logD("onErrorResponse", String.valueOf(error));
                     ErrorDialog(Constants.Title.NETWORK_ERROR,Constants.Message.NETWORK_ERROR);
                 }
             }) {

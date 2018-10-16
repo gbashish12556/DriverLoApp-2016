@@ -132,13 +132,10 @@ public class FareChart extends Fragment {
             roundtrip_minute_picker.setMinValue(0);
             roundtrip_minute_picker.setWrapSelectorWheel(true);
             String[] minuteValues = new String[12];
-            Fn.SystemPrintLn("minute_array_length" + String.valueOf(minuteValues.length));
             for (int i = 0; i < minuteValues.length; i++) {
                 String number = Integer.toString(i*Constants.Config.MINUTE_PICKER_SLAB);
                 minuteValues[i] = number.length() < 2 ? "0" + number : number;
-//                Fn.SystemPrintLn("index: "+String.valueOf(i));
             }
-            Fn.SystemPrintLn(Arrays.toString(minuteValues));
             roundtrip_minute_picker.setDisplayedValues(minuteValues);
 
             outstation_day_picker = (NumberPicker) view.findViewById(R.id.outstation_day_picker);
@@ -150,15 +147,11 @@ public class FareChart extends Fragment {
             outstation_hour_picker.setMaxValue(1);
             outstation_hour_picker.setWrapSelectorWheel(true);
             String[] hourValues = new String[2];
-            Fn.SystemPrintLn("minute_array_length"+String.valueOf(hourValues.length));
             for (int i = 0; i < hourValues.length; i++) {
                 String number = Integer.toString(i*Constants.Config.HOUR_PICKER_SLAB);
                 hourValues[i] = number.length() < 2 ? "0" + number : number;
-//                Fn.SystemPrintLn("index: "+String.valueOf(i));
             }
-            Fn.SystemPrintLn(Arrays.toString(hourValues));
             outstation_hour_picker.setDisplayedValues(hourValues);
-//            outstation_estimate_string = (TextView) view.findViewById(R.id.outstation_estimate);
             return view;
         }
     }
@@ -172,7 +165,6 @@ public class FareChart extends Fragment {
             journey.add(0, "Oneway");
             journey.add(1, "Roundtrip");
             journey.add(2, "Outstation");
-            Fn.SystemPrintLn(journey);
             String query = "SELECT city_name FROM " + controller.TABLE_VIEW_FARE_CHART;
             Cursor cit = database.rawQuery(query, null);
             try {
@@ -191,7 +183,6 @@ public class FareChart extends Fragment {
             city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
-                    Fn.SystemPrintLn("City Spinner Selected");
                     String city_selected = adapter.getItemAtPosition(i).toString();
                     String query = "SELECT base_fare, fare ,night_charge, return_charge, outstation_base_fare, outstation_fare FROM " + controller.TABLE_VIEW_FARE_CHART + " WHERE city_name = '" + city_selected + "' ";
                     Cursor fares = database.rawQuery(query, null);
@@ -221,14 +212,12 @@ public class FareChart extends Fragment {
                     Fn.SystemPrintLn("Journey Spinner Selected");
                     journey_type = adapter.getItemAtPosition(i).toString();
                     if (journey_type.equals(journey.get(0))) {
-                        Fn.SystemPrintLn("Oneway selected");
                         one_way_charge_view.setVisibility(View.VISIBLE);
                         short_trip_layout.setVisibility(View.VISIBLE);
                         one_way_layout.setVisibility(View.VISIBLE);
                         round_trip_layout.setVisibility(View.GONE);
                         outstation_layout.setVisibility(View.GONE);
                     } else if(journey_type.equals(journey.get(1))) {
-                        Fn.SystemPrintLn("Roundtrip  selected");
                         one_way_charge_view.setVisibility(View.GONE);
                         short_trip_layout.setVisibility(View.VISIBLE);
                         one_way_layout.setVisibility(View.GONE);
@@ -253,7 +242,6 @@ public class FareChart extends Fragment {
                             }
                         });
                     } else if(journey_type.equals(journey.get(2))) {
-                        Fn.SystemPrintLn("Outstation  selected");
                         short_trip_layout.setVisibility(View.GONE);
                         outstation_layout.setVisibility(View.VISIBLE);
                         outstation_day_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -303,7 +291,6 @@ public class FareChart extends Fragment {
                                                    @Override
                                                    public void onClick(View v) {
                    try {
-                       Fn.SystemPrintLn("pickup_location clicked");
                        Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
                                .setBoundsBias(new LatLngBounds(southwest, northeast))
                                .setFilter(typeFilter)
@@ -321,7 +308,6 @@ public class FareChart extends Fragment {
                 @Override
                 public void onClick(View v) {
                     try {
-                        Fn.SystemPrintLn("dropoff_location clicked");
                         Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
                                 .setBoundsBias(new LatLngBounds(southwest, northeast))
                                 .setFilter(typeFilter)
@@ -342,14 +328,11 @@ public class FareChart extends Fragment {
     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onActivityResult called");
         super.onActivityResult(requestCode, resultCode, data);
         if(getActivity() != null) {
             // Check that the result was from the autocomplete widget.
             if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_PICKUP1) {
-                Fn.logD("PLACE_AUTOCOMPLETE_REQUEST_CODE", "PLACE_AUTOCOMPLETE_REQUEST_CODE called");
                 if (resultCode == getActivity().RESULT_OK) {
-                    Fn.logD("resultCode", "resultCode called");
                     // Get the user's selected place from the Intent.
                     Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                     // TODO call location based filter
@@ -358,7 +341,6 @@ public class FareChart extends Fragment {
                     Double current_lng = latLong.longitude;
                     pickup_address = place.getName().toString().replaceAll("[\r\n]+", " ") + "";
                     pickup_location.setText(pickup_address);
-                    Fn.SystemPrintLn("pickup_address"+pickup_address+"dropoff_address"+dropoff_address);
                     if (Fn.IsInServiceArea(current_lat,current_lng,"pickup",getActivity())) {
                         if(isValid(pickup_address,dropoff_address)){
                             CalculateTravelTime(pickup_address,dropoff_address);
@@ -370,7 +352,6 @@ public class FareChart extends Fragment {
                 }
             } else if(requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_DROPOFF1) {
                 if (resultCode == getActivity().RESULT_OK) {
-                    Fn.logD("resultCode", "resultCode called");
                     // Get the user's selected place from the Intent.
                     Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                     // TODO call location based filter
@@ -379,7 +360,6 @@ public class FareChart extends Fragment {
                     Double current_lng = latLong.longitude;
                     dropoff_address = place.getName().toString().replaceAll("[\r\n]+", " ") + "";
                     dropoff_location.setText(dropoff_address);
-                    Fn.SystemPrintLn("pickup_address" + pickup_address + "dropoff_address" + dropoff_address);
                     if (Fn.IsInServiceArea(current_lat, current_lng, "dropoff", getActivity())) {
                         if(isValid(pickup_address,dropoff_address)){
                             CalculateTravelTime(pickup_address,dropoff_address);
@@ -414,14 +394,10 @@ public class FareChart extends Fragment {
     * this code is for oneway trip
     */
     public float CalculateTravelTime(String pickup_address, String dropoff_address){
-        Fn.SystemPrintLn("CalculateTravelTime called");
         float distance = 0;
         try {
-//           String URL = "https://maps.googleapis.com/maps/api/distancematrix/json?&origin="+ URLEncoder.encode(pickup_address, "UTF-8")+"&destination="+URLEncoder.encode(dropoff_address,"UTF-8")+"&language=en-EN&sensor=false&key=" +getResources().getString(R.string.server_APIkey1)+" ";
-
             String  URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+URLEncoder.encode(pickup_address,"UTF-8")+"&destinations="+URLEncoder.encode(dropoff_address,"UTF-8")+"&key="+getResources().getString(R.string.server_APIkey1)+"";
-            Fn.SystemPrintLn(URL);
-           HashMap<String,String> hashMap = new HashMap<>();
+            HashMap<String,String> hashMap = new HashMap<>();
             sendVolleyRequest(URL,hashMap);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -429,17 +405,14 @@ public class FareChart extends Fragment {
         return distance;
     }
     public void sendVolleyRequest(String URL, final HashMap<String,String> hMap){
-        Fn.SystemPrintLn("sendVolleyRequest called");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Fn.logD("onResponse", String.valueOf(response));
                 CalculateFare(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Fn.logD("onErrorResponse", String.valueOf(error));
                 ErrorDialog(Constants.Title.NETWORK_ERROR, Constants.Message.NETWORK_ERROR);
             }
         }){
@@ -454,11 +427,9 @@ public class FareChart extends Fragment {
         }
     }
     public void CalculateFare(String response){
-        Fn.SystemPrintLn("CalculateFare called");
         int fare = 0;
         JSONObject jsonObject = null;
         try {
-            Fn.SystemPrintLn(response);
             jsonObject = new JSONObject(response);
             JSONArray rows = jsonObject.getJSONArray("rows");
             JSONObject firstObject = rows.getJSONObject(0);

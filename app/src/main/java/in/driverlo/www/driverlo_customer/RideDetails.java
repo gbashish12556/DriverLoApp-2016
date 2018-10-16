@@ -80,20 +80,15 @@ public class RideDetails extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if(getActivity() != null) {
             if ((getActivity().getIntent() != null) && (getActivity().getIntent().getExtras() != null)) {
-                Fn.logD("getActivity().getIntent().getExtras()", "getActivity().getIntent().getExtras()");
                 Bundle bundle = getActivity().getIntent().getExtras();
                 brn_no = Fn.getValueFromBundle(bundle, Constants.Keys.BRN_NO);
-                Fn.logD("received_bcn_no_intent", brn_no);
                 getActivity().getIntent().setData(null);
                 getActivity().setIntent(null);
             } else if (this.getArguments() != null) {
-                Fn.logD("getArguments", "getArguments");
                 Bundle bundle = this.getArguments();
                 brn_no = Fn.getValueFromBundle(bundle, Constants.Keys.BRN_NO);
-                Fn.logD("received_bcn_no_argument", brn_no);
             }
             String booking_status_url = Constants.Config.ROOT_PATH + "ride_details";
-            Fn.logD("booking_status_url", booking_status_url);
             HashMap<String, String> hashMap = new HashMap<String, String>();
             String customer_token = Fn.getPreference(getActivity(), Constants.Keys.CUSTOMER_TOKEN);
             hashMap.put(Constants.Keys.BRN_NO, brn_no);
@@ -116,8 +111,6 @@ public class RideDetails extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Fn.SystemPrintLn(response);
-//                Fn.logD("booking_status","booking_status");
                 if(method.equals("ride_detail")) {
                     bookingStatusSuccess(response);
                 }else if(method.equals("cancel_order")){
@@ -127,8 +120,7 @@ public class RideDetails extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Fn.logD("onErrorResponse", String.valueOf(error));
-                if(getActivity()!=null) {
+                 if(getActivity()!=null) {
                     Fn.ToastShort(getActivity(), Constants.Message.NETWORK_ERROR);
                 }
             }
@@ -143,23 +135,17 @@ public class RideDetails extends Fragment {
     }
     protected void bookingStatusSuccess(String response) {
         if(getActivity()!=null) {
-            Fn.logD("BOOKING_DETAILS_FRAGMENT_LIFECYCLE", "bookingStatusSuccess Called");
             if (!Fn.CheckJsonError(response)) {
-//            Fn.logD("bookingStatusSuccess", "bookingStatusSuccess Called");
-                Fn.logD("received_json", response);
                 JSONObject jsonObject;
                 JSONArray jsonArray;
                 try {
                     jsonObject = new JSONObject(response);
                     String errFlag = jsonObject.getString("errFlag");
-                    if (errFlag.equals("1")) {
-                        Fn.logD("toastNotdone", "toastNotdone");
-                    } else if (errFlag.equals("0")) {
+                    if (errFlag.equals("0")) {
                         if (jsonObject.has("likes")) {
                             jsonArray = jsonObject.getJSONArray("likes");
                             int count = 0;
                             while (count < jsonArray.length()) {
-                                Fn.logD("likes_entered", "likes_entered");
                                 JSONObject JO = jsonArray.getJSONObject(count);
                                 pickup_location.setText(JO.getString("pickup_point"));
                                 String dropoff_point = JO.getString("dropoff_point");
@@ -183,8 +169,7 @@ public class RideDetails extends Fragment {
                                     license_no.setText(JO.getString("driver_license_no"));
                                     approval_status_container.setVisibility(View.GONE);
                                     cancel_button_container.setVisibility(View.GONE);
-                                    Fn.SystemPrintLn("is_completed_1");
-                                    float received_driver_rating = Float.parseFloat(JO.getString("driver_rating"));
+                                     float received_driver_rating = Float.parseFloat(JO.getString("driver_rating"));
                                     rating_bar_container.setVisibility(View.VISIBLE);
                                     if(received_driver_rating == 0.0f){
                                         handleRating();
@@ -194,22 +179,18 @@ public class RideDetails extends Fragment {
                                         rating_bar.setIsIndicator(true);
                                     }
                                 }else if(received_is_approved.equals("1")){
-                                    Fn.SystemPrintLn("is_approved_1");
                                     driver_detail_container.setVisibility(View.VISIBLE);
                                     rating_bar_container.setVisibility(View.GONE);
                                     driver_name.setText(JO.getString("driver_name"));
                                     license_no.setText(JO.getString("driver_license_no"));
                                     approval_status_container.setVisibility(View.GONE);
                                 }else if(received_is_cancelled.equals("1")){
-                                    Fn.SystemPrintLn("is_cancelled_1");
                                     driver_detail_container.setVisibility(View.GONE);
                                     cancel_button_container.setVisibility(View.GONE);
                                     approval_status.setText("Cancelled");
                                 }
                                 count++;
                             }
-                        } else {
-                            Fn.logD("vehicle_match", Constants.Message.NO_CURRENT_BOOKING);
                         }
                     }
                 } catch (JSONException e) {
@@ -217,7 +198,6 @@ public class RideDetails extends Fragment {
                 }
             } else {
                 ErrorDialog(Constants.Title.SERVER_ERROR, Constants.Message.SERVER_ERROR);
-//            Fn.ToastShort(getActivity(), Constants.Message.NETWORK_ERROR);
             }
         }
     }
@@ -227,7 +207,6 @@ public class RideDetails extends Fragment {
                 Fragment fragment = new RideDetails();
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.Keys.BRN_NO, brn_no);
-                Fn.logD("passed_brn_no", brn_no);
                 fragment.setArguments(Fn.CheckBundle(bundle));
                 FragmentManager fragmentManager = FullActivity.fragmentManager;
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -238,7 +217,6 @@ public class RideDetails extends Fragment {
                     FullActivity.homeFragmentIndentifier = transaction.commit();
                 } else {
                     transaction.commit();
-                    Fn.logD("fragment instanceof Book", "homeidentifier != -1");
                 }
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Ride Details");
             } else {
@@ -252,7 +230,6 @@ public class RideDetails extends Fragment {
         }
     }
     protected void handleRating(){
-        Fn.SystemPrintLn("Handle Rating Called");
         rating_text.setText("Rate Driver");
         rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -260,7 +237,6 @@ public class RideDetails extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("rating", String.valueOf(rating));
                 bundle.putString("brn_no", brn_no);
-                Fn.SystemPrintLn("brn_no" + brn_no + "rating" + rating);
                 rd.setArguments(Fn.CheckBundle(bundle));
                 rd.show(getActivity().getFragmentManager(), "ABC");
             }

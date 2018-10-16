@@ -79,13 +79,11 @@ public class ApplyReferalCode extends DialogFragment implements View.OnClickList
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Fn.logD("onResponse_booking_status", String.valueOf(response));
                     ConfirmBookingSuccess(response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Fn.logD("onErrorResponse", String.valueOf(error));
                 }
             }) {
                 @Override
@@ -100,7 +98,6 @@ public class ApplyReferalCode extends DialogFragment implements View.OnClickList
 
     protected void ConfirmBookingSuccess(String response) {
         if(getActivity() !=  null) {
-            Fn.logD("CONFIRM_BOOKING_FRAGMENT_LIFECYCLE", "ConfirmBookingSuccess Called");
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String errFlag = jsonObject.getString("errFlag");
@@ -116,7 +113,6 @@ public class ApplyReferalCode extends DialogFragment implements View.OnClickList
                         FullActivity.homeFragmentIndentifier =  transaction.commit();
                     }else{
                         transaction.commit();
-                        Fn.logD("fragment instanceof Book","homeidentifier != -1");
                     }
                     ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Ride Details");
                     Fn.ToastShort(getActivity(),errMsg);

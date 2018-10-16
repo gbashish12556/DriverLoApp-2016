@@ -119,7 +119,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onCreateView called");
         // Inflate the layout for this fragment
         if (container == null) {
             return null;
@@ -143,7 +142,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(getActivity()!= null) {
-            Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onActivityCreated called");
             controller = new DBController(getActivity());
             database = controller.getWritableDatabase();
             mResultReceiver = new AddressResultReceiver(new Handler());
@@ -156,8 +154,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 public void onClick(View v) {
                     pickup_address = pickup_location.getText().toString();
                     dropoff_address = dropoff_location.getText().toString();
-                    Fn.SystemPrintLn("pickup_address" + pickup_address);
-                    Fn.SystemPrintLn("dropoff_address" + dropoff_address);
                     Bundle bundle = new Bundle();
                     if (isValid(pickup_address, dropoff_address)) {
                         String[] journey_type_list = getResources().getStringArray(R.array.journey_type);
@@ -166,7 +162,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                         Fn.putPreference(getActivity(), Constants.Keys.JOURNEY_TYPE , journey_type_list[journey_type]);
                         DatePickerDialog date_picker_dialog = new DatePickerDialog();
                         date_picker_dialog.show(getActivity().getFragmentManager(), "ABC");
-//                            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_confirm_booking_fragment);
                     } else {
                         Fn.ToastShort(getActivity(), Constants.Message.INVALID_ADDRESS);
                     }
@@ -257,7 +252,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
     }
     @Override
     public void onClick(View v) {
-        Fn.SystemPrintLn("onClick");
         // Is the button now checked?
         boolean checked = ((RadioButton) v).isChecked();
         // Check which radio button was clicked
@@ -266,7 +260,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 if (checked){
                     journey_type = 0;
                     dropoff_container.setVisibility(View.GONE);
-                    Fn.SystemPrintLn("round_trip_clicked");
                 }
                     // Pirates are the best
                     break;
@@ -274,7 +267,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 if (checked){
                     journey_type = 1;
                     dropoff_container.setVisibility(View.VISIBLE);
-                    Fn.SystemPrintLn("oneway_trip_clicked");
                 }
                     // Ninjas rule
                     break;
@@ -282,7 +274,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 if (checked){
                     journey_type = 2;
                     dropoff_container.setVisibility(View.VISIBLE);
-                    Fn.SystemPrintLn("out_station_trip_clicked");
                 }
                     // Ninjas rule
                     break;
@@ -299,7 +290,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
      * installed Google Play services and returned to the app.
      */
     public void LoadAddress(){
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "LoadAddress called");
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -314,7 +304,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
             Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(FullActivity.mGoogleApiClient);
             if (mLastLocation != null) {
                 changeMap(mLastLocation);
-                Log.d(TAG, "ON connected");
             } else
                 try {
                     LocationServices.FusedLocationApi.removeLocationUpdates(FullActivity.mGoogleApiClient, this);
@@ -336,7 +325,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
     @Override
     public void onLocationChanged(Location location) {
         if(getActivity() != null) {
-            Fn.logD("onLocationChanged", "onLocationChanged");
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -361,7 +349,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
 
     private void changeMap(Location location) {
         if(getActivity() != null) {
-            Log.d(TAG, "Reaching map" + mMap);
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -378,7 +365,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                     @Override
                     public void onCameraChange(CameraPosition cameraPosition) {
-                        Log.d("Camera postion change" + "", cameraPosition + "");
                         mCenterLatLong = cameraPosition.target;
                         current_lat = mCenterLatLong.latitude;
                         current_lng = mCenterLatLong.longitude;
@@ -411,7 +397,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//                mLocationMarkerText.setText("Lat : " + location.getLatitude() + "," + "Long : " + location.getLongitude());
                 Fn.SystemPrintLn(location);
                 startIntentService(location);
             } else {
@@ -425,7 +410,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
      */
     protected void startIntentService(Location mLocation) {
         if(getActivity() != null) {
-            Fn.logD("startIntentService", "startIntentService");
             // Create an intent for passing to the intent service responsible for fetching the address.
             Intent intent = new Intent(getActivity(), FetchAddressIntentService.class);
             // Pass the result receiver as an extra to the service.
@@ -435,7 +419,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
             // Start the service. If the service isn't already running, it is instantiated and started
             // (creating a process for it if needed); if it is running then it remains running. The
             // service kills itself automatically once all intents are processed.
-            Log.d("FetchAddress_started", "FetchAddress_started");
             getActivity().startService(intent);
         }
     }
@@ -454,7 +437,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
          */
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            Fn.logD("onReceiveResult", "onReceiveResult");
             // Display the address string or an error message sent from the intent service.
             Fn.SystemPrintLn(resultData);
             mAddressOutput = resultData.getString(AppUtils.LocationConstants.RESULT_DATA_KEY);
@@ -476,14 +458,9 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
      * Updates the address in the UI.
      */
     protected void displayAddressOutput() {
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "displayAddressOutput called");
-//        Fn.SystemPrintLn(mAddressOutput);
         try {
             if (mAreaOutput != null)
-                // mLocationText.setText(mAreaOutput+ "");
-//                pickup_location.setText(mAddressOutput.replaceAll("[\r\n]+", " "));
                 pickup_location.setText(mAddressOutput);
-            //mLocationText.setText(mAreaOutput);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -494,14 +471,11 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onActivityResult called");
         super.onActivityResult(requestCode, resultCode, data);
         if(getActivity() != null) {
             // Check that the result was from the autocomplete widget.
             if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_PICKUP) {
-                Fn.logD("PLACE_AUTOCOMPLETE_REQUEST_CODE", "PLACE_AUTOCOMPLETE_REQUEST_CODE called");
                 if (resultCode == getActivity().RESULT_OK) {
-                    Fn.logD("resultCode", "resultCode called");
                     // Get the user's selected place from the Intent.
                     Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                     // TODO call location based filter
@@ -524,7 +498,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 }
             } else if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_DROPOFF) {
                 if (resultCode == getActivity().RESULT_OK) {
-                    Fn.logD("resultCode", "resultCode called");
                     // Get the user's selected place from the Intent.
                     Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                     // TODO call location based filter
@@ -559,9 +532,6 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
                 }
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getActivity(), data);
-            } else if (resultCode == getActivity().RESULT_CANCELED) {
-                // Indicates that the activity closed before a selection was made. For example if
-                // the user pressed the back button.
             }
         }
     }
@@ -570,17 +540,7 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
             Fn.showDialog(getActivity(), Title, Message);
         }
     }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onDestroy called");
-    }
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onDetach called");
-    }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
@@ -596,12 +556,10 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
     public void onResume() {
         super.onResume();
         Fn.startAllVolley(requestQueue);
-        Fn.logE("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onResume Called");
     }
     @Override
     public void onPause() {
         super.onPause();
-        Fn.logE("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onPause Called");
         Fn.stopAllVolley(requestQueue);
     }
     @Override
@@ -613,68 +571,5 @@ public class HireDriver extends Fragment implements  View.OnClickListener, Googl
         }
         database.close();
         FullActivity.fragmentManager.beginTransaction().remove(getChildFragmentManager().findFragmentById(R.id.mMapFragment)).commitAllowingStateLoss();
-        Fn.logE("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "onDestroyView Called");
     }
-
-
-  /*  public void sendVolleyRequest(String URL, final HashMap<String,String> hMap){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Fn.logD("onResponse", String.valueOf(response));
-                CitySuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Fn.logD("onErrorResponse", String.valueOf(error));
-                lower_view.setVisibility(View.GONE);
-                marker_container.setVisibility(View.GONE);
-                ErrorDialog(Constants.Title.NETWORK_ERROR, Constants.Message.NETWORK_ERROR);
-            }
-        }){
-            @Override
-            protected HashMap<String,String> getParams(){
-                return hMap;
-            }
-        };
-        stringRequest.setTag(TAG);
-        if(getActivity()!=null) {
-            Fn.addToRequestQue(requestQueue, stringRequest, getActivity());
-        }
-    }
-    public void CitySuccess(String response){
-        if(getActivity() !=  null) {
-            Fn.logD("HIRE_DRIVER_FRAGMENT_LIFECYCLE", "CitySuccess Called");
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                String  errFlag = jsonObject.getString("errFlag");
-                String  errMsg = jsonObject.getString("errMsg");
-//                     Fn.SystemPrintLn(errFlag + errMsg);
-                if (errFlag.equals("0")) {
-                    JSONObject UpdationObject;
-                    JSONArray jsonArray;
-                    if (jsonObject.has("likes")) {
-                        jsonArray = jsonObject.getJSONArray("likes");
-                        int count = 0;
-                        while (count < jsonArray.length()) {
-                            UpdationObject = jsonArray.getJSONObject(count);
-                            String city_id  = UpdationObject.get(Constants.Keys.CITY_ID).toString();
-                            Fn.logD("city_id_received", city_id);
-                            Fn.putPreference(getActivity(),Constants.Keys.CITY_ID,city_id);
-                            lower_view.setVisibility(View.VISIBLE);
-                            marker_container.setVisibility(View.VISIBLE);
-                            count++;
-                        }
-                    }
-                }else if (errFlag.equals("1")) {
-                    lower_view.setVisibility(View.GONE);
-                    marker_container.setVisibility(View.GONE);
-                    ErrorDialog(Constants.Title.ERROR, errMsg);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }

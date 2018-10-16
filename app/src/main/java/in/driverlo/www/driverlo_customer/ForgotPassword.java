@@ -74,15 +74,12 @@ public class ForgotPassword extends DialogFragment implements View.OnClickListen
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Fn.logD("onResponse_booking_status", String.valueOf(response));
                     String trimmed_response = response.substring(response.indexOf("{"));
-                    Fn.logD("trimmed_response", trimmed_response);
                     handleResponse(trimmed_response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Fn.logD("onErrorResponse", String.valueOf(error));
                 }
             }) {
                 @Override
@@ -97,10 +94,7 @@ public class ForgotPassword extends DialogFragment implements View.OnClickListen
 
     protected void handleResponse(String response) {
         if(getActivity() !=  null) {
-            Fn.logD("COMPLETED_RATING_FRAGMENT_LIFECYCLE", "rate_Driver Called");
             if (!Fn.CheckJsonError(response)) {
-//            Fn.logD("bookingStatusSuccess", "bookingStatusSuccess Called");
-                Fn.logD("received_json", response);
                 JSONObject jsonObject;
                 try {
                     jsonObject = new JSONObject(response);

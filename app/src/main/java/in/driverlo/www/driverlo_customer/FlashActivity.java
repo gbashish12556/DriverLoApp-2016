@@ -60,7 +60,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash);
         getSupportActionBar().hide();
-        Fn.logE("FLASH_ACTIVITY_LIFECYCLE", "onCreate");
         controller = new DBController(this);
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -74,19 +73,13 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
 
     @Override
     protected void onResume() {
-        Fn.logE("FLASH_ACTIVITY_LIFECYCLE", "onResume");
         super.onResume();
-//        Fn.startAllVolley(requestQueue);
         stopTimer = false;
-        Fn.logE("google_connected", "true");
         if (checkPlayServices())
         {
-            Fn.logE("checkPlayServices", "true");
             if (Fn.isGpsEnabled(this)) {
                 if (Fn.isNetworkEnabled(this)) {
-                    Fn.logE("isNetworkEnabled", "true");
                     if (mGoogleApiClient.isConnected()) {
-                        Fn.logE("mGoogleApiClient", "true");
                         isNetworkEnabled = true;
                         location = Fn.getAccurateCurrentlocation(mGoogleApiClient, this);
                         if (location != null) {
@@ -105,7 +98,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
                         }
                     }
                 } else {
-                //    Fn.showNetworkSettingDialog(this);
                     ErrorDialog(Constants.Title.NETWORK_ERROR, Constants.Message.NETWORK_ERROR);
                     if (timer == null) {
                         TimerProgramm();
@@ -117,8 +109,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
         }
     }
     public void TimerProgramm() {
-//        Fn.showProgressDialogLong(Constants.Message.CONNECTING, this);
-        Fn.logD("TimerProgram", "TimerProgram");
         int delay = Constants.Config.DELAY_LOCATION_CHECK; // delay for 0 sec.
         int period = Constants.Config.PERIOD_LOCATION_CHECK; // repeat every 100 msec.
         timer = new Timer();
@@ -126,9 +116,7 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-//                        Fn.logD("TimerProgram_running", "TimerProgram_running");
                         if ((stopTimer != true) && (stopForEver != true)) {
-                            Fn.logD("checkLocation", "checkLocation");
                             checkLocation();
                         }
                     }
@@ -139,8 +127,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
     public void checkLocation(){
         if(Fn.isNetworkEnabled(this)){
             if (mGoogleApiClient.isConnected()) {
-                Fn.logE("mGoogleApiClient", "true");
-                Fn.logE("isNetworkEnabled", "true");
                 location = Fn.getAccurateCurrentlocation(mGoogleApiClient, this);
                 if (location != null) {
                     stopForEver = true;
@@ -159,8 +145,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
     @Override
     public void onPause() {
         super.onPause();
-        Fn.logE("FLASH_ACTIVITY_LIFECYCLE", "onPause Called");
-//        Fn.stopAllVolley(requestQueue);
         if(mGoogleApiClient.isConnected()){
             mGoogleApiClient.disconnect();
         }
@@ -168,9 +152,7 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
     }
     @Override
     protected void onDestroy() {
-        Fn.logE("FLASH_ACTIVITY_LIFECYCLE", "onDestroy Called");
         super.onDestroy();
-//        Fn.cancelAllRequest(requestQueue, TAG);
         if(timer != null){
             timer.cancel();
             timer = null;
@@ -189,14 +171,11 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
     }
     public void SyncDataBase(){
         String url_select = Constants.Config.ROOT_PATH+"fetch_view";
-        Fn.logD("url_select",url_select);
         String view_name = controller.TABLE_VIEW_FARE_CHART;
         String primary_key = controller.ID;
         String timestamp;
         String q1="select max(update_date) from ";
-        //String q2=" order by update_date desc limit 1";
         String s = "";
-        //String query3 = "SELECT update_date FROM ";
         database = controller.getWritableDatabase();
             long cnt = 0;
             try {
@@ -225,13 +204,11 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Fn.logD("onResponse_booking_status", String.valueOf(response));
                     DataBaseSyncSuccess(response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Fn.logD("onErrorResponse", String.valueOf(error));
                     ErrorDialog(Constants.Title.NETWORK_ERROR, Constants.Message.NETWORK_ERROR);
                 }
             }) {
@@ -247,7 +224,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
 
     protected void DataBaseSyncSuccess(String response) {
         if(this !=  null) {
-            Fn.logD("FLASH_ACTIVITY_LIFECYCLE", "DataBaseSyncSuccess");
             try {
                 String errFlag;
                 String errMsg;
@@ -260,7 +236,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
                 if (jsonObject.has("likes"))
                 {
                     controller.deleteTable();
-                    Fn.logD("table deleted", "delete table called");
                     ////controller.createTable(j);
                     jsonArray = jsonObject.getJSONArray("likes");
                     int count = 0;
@@ -289,12 +264,9 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
                 else if(errMsg.compareTo("Your request successful")==0)
                 {
                     controller.deleteTable();
-                    Fn.logD("table deleted", "delete table called");
-                    Fn.logD("Entered","where errMsg=your request successful");
                 }
             } catch (Exception e) {
                 // handle exception
-                Fn.logE("log_tag", "Error parsing data " + e.toString());
             }
         }
         database.close();
@@ -302,7 +274,6 @@ public class FlashActivity extends AppCompatActivity implements  GoogleApiClient
     }
     public void NextActivity() {
         String customer_token = Fn.getPreference(this, Constants.Keys.CUSTOMER_TOKEN);
-        Fn.logD(Constants.Keys.CUSTOMER_TOKEN, customer_token);
         if (!customer_token.equals("defaultStringIfNothingFound")) {
             Intent intent1 = new Intent(this, FullActivity.class);
             intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

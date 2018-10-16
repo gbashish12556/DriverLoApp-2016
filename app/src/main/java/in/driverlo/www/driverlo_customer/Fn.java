@@ -278,7 +278,6 @@ public class Fn {
         Boolean flag = false;
         JSONObject jsonObject;
         JSONArray jsonArray;
-//        Fn.logD("json_string", json_string);
         try {
             jsonObject = new JSONObject(json_string);
             errFlag = jsonObject.getString("errFlag");
@@ -473,7 +472,6 @@ public class Fn {
         // Try to get location if you GPS Service is enabled
         if (isGPSEnabled) {
             isGPSTrackingEnabled = true;
-//            Fn.logD(TAG, "Application use GPS Service");
                         /*
                          * This provider determines location using
                          * satellites. Depending on conditions, this provider may take a while to return
@@ -483,7 +481,6 @@ public class Fn {
         } else if (isNetworkEnabled) { // Try to get location if you Network Service is enabled
             isGPSTrackingEnabled = true;
 
-//            Fn.logD(TAG, "Application use Network State to get GPS coordinates");
                     /*
                      * This provider determines location based on
                      * availability of cell tower and WiFi access points. Results are retrieved
@@ -495,10 +492,8 @@ public class Fn {
         }
         // Application can use GPS or Network Provider
         if (!provider_info.isEmpty()) {
-            Fn.logD("location_manager", String.valueOf(locationManager));
             if (locationManager != null)
             {
-                Fn.logD("location_manager_new", String.valueOf(locationManager));
                 if (ActivityCompat.checkSelfPermission(ctx, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ctx, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -508,7 +503,6 @@ public class Fn {
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
                     location = locationManager.getLastKnownLocation(provider_info);
-                    Fn.logD("permission_check_done1", "permission_check_done1");
                 }
                 if(location != null) {
                     return location;

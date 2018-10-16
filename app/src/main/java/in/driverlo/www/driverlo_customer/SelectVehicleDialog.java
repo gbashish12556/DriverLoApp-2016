@@ -94,22 +94,7 @@ public class SelectVehicleDialog extends DialogFragment implements View.OnClickL
                     return true;
                 }
             });
-//            alertDialog.setTitle(Constants.Title.BOOKING_DATETIME);
-           /* alertDialog.setCustomTitle(dialogView);
-            alertDialog.setPositiveButton(R.string.Next, new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EstimatedTimeDialog estimatedTime = new EstimatedTimeDialog();
-                    estimatedTime.show(getActivity().getFragmentManager(), "ABC");
-                }
-            });
-            alertDialog.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });*/
             alertDialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
                 @Override
@@ -117,8 +102,6 @@ public class SelectVehicleDialog extends DialogFragment implements View.OnClickL
                                      KeyEvent event) {
                     // TODO Auto-generated method stub
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        //alertDialog.dismiss();
-//                    ((MainActivity)context).moveTaskToBack(true);
                         android.os.Process.killProcess(android.os.Process.myPid());
                         System.exit(1);
                     }
@@ -128,76 +111,49 @@ public class SelectVehicleDialog extends DialogFragment implements View.OnClickL
 
         }
         dialog = alertDialog.create();
-      /*  final Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-        positiveButtonLL.gravity = Gravity.CENTER;
-        positiveButton.setLayoutParams(positiveButtonLL);
-        final Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-        LinearLayout.LayoutParams negativeButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-        negativeButtonLL.gravity = Gravity.CENTER;
-        negativeButton.setLayoutParams(positiveButtonLL);*/
-        return dialog;
+         return dialog;
 
     }
 
     @Override
     public void onClick(View v) {
+        hatchack.setChecked(false);
+        sedan.setChecked(false);
+        luxury.setChecked(false);
+        suv.setChecked(false);
+
         boolean checked = ((RadioButton) v).isChecked();
         // Check which radio button was clicked
         switch(v.getId()) {
             case R.id.hatchback:
                 if (checked){
                     vehicle_type = 0;
-                    sedan.setChecked(false);
-                    suv.setChecked(false);
-                    luxury.setChecked(false);
-                    Fn.SystemPrintLn("hatchback_clicked");
                 }
-                // Pirates are the best
                 break;
             case R.id.sedan:
                 if (checked){
                     vehicle_type = 1;
-                    hatchack.setChecked(false);
-                    suv.setChecked(false);
-                    luxury.setChecked(false);
-                    Fn.SystemPrintLn("sedan_clicked");
                 }
-                // Ninjas rule
                 break;
             case R.id.suv:
                 if (checked){
                     vehicle_type = 2;
-                    hatchack.setChecked(false);
-                    sedan.setChecked(false);
-                    luxury.setChecked(false);
-                    Fn.SystemPrintLn("suv_clicked");
                 }
-                // Ninjas rule
                 break;
             case R.id.luxury:
                 if (checked){
                     vehicle_type = 3;
-                    hatchack.setChecked(false);
-                    sedan.setChecked(false);
-                    suv.setChecked(false);
-                    Fn.SystemPrintLn("luxury_clicked");
                 }
-                // Ninjas rule
                 break;
             case R.id.manual:
                 if (checked){
                     vehicle_mode = 0;
-                    Fn.SystemPrintLn("manual_clicked");
                 }
-                // Ninjas rule
                 break;
             case R.id.automatic:
                 if (checked){
                     vehicle_mode = 1;
-                    Fn.SystemPrintLn("automatic_clicked");
                 }
-                // Ninjas rule
                 break;
         }
     }

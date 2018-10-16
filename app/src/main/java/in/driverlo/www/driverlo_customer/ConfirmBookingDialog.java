@@ -233,16 +233,12 @@ public class ConfirmBookingDialog extends DialogFragment {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Fn.SystemPrintLn(response);
-                    Fn.logD("onResponse",response);
                     String trimmed_response = response.substring(response.indexOf("{"));
-                    Fn.logD("trimmed_response", trimmed_response);
                     ConfirmBookingSuccess(trimmed_response );
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Fn.logD("onErrorResponse", String.valueOf(error));
                     ErrorDialog(Constants.Title.NETWORK_ERROR, Constants.Message.NETWORK_ERROR);
                 }
             }) {
@@ -258,7 +254,6 @@ public class ConfirmBookingDialog extends DialogFragment {
 
     protected void ConfirmBookingSuccess(String response) {
         if(getActivity() !=  null) {
-            Fn.logD("CONFIRM_BOOKING_FRAGMENT_LIFECYCLE", "ConfirmBookingSuccess Called");
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String errFlag = jsonObject.getString("errFlag");
@@ -267,17 +262,14 @@ public class ConfirmBookingDialog extends DialogFragment {
 //                    Fn.Toast(this,errMsg);
                     if(jsonObject.has("likes")) {
                         JSONArray jsonArray = jsonObject.getJSONArray("likes");
-                        Fn.logD("toastdone", "toastdone");
                         int count = 0;
                         while (count < jsonArray.length())
                         {
-                            Fn.logD("likes_entered", "likes_entered");
                             JSONObject JO = jsonArray.getJSONObject(count);
                             String brn_no = JO.getString(Constants.Keys.BRN_NO);
                             Fragment fragment = new RideDetails();
                             Bundle bundle = new Bundle();
                             bundle.putString(Constants.Keys.BRN_NO,brn_no);
-                            Fn.logD("passed_bcn_no", brn_no);
                             fragment.setArguments(Fn.CheckBundle(bundle));
                             FragmentManager fragmentManager =FullActivity.fragmentManager;
                             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -288,7 +280,6 @@ public class ConfirmBookingDialog extends DialogFragment {
                                 FullActivity.homeFragmentIndentifier =  transaction.commit();
                             }else{
                                 transaction.commit();
-                                Fn.logD("fragment instanceof Book","homeidentifier != -1");
                             }
                             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Ride Details");
                             Fn.ToastShort(getActivity(),errMsg);

@@ -45,13 +45,10 @@ public class EstimatedDayDialog extends DialogFragment {
             for (int i = 0; i < hourValues.length; i++) {
                 String number = Integer.toString(i*Constants.Config.HOUR_PICKER_SLAB);
                 hourValues[i] = number.length() < 2 ? "0" + number : number;
-//                Fn.SystemPrintLn("index: "+String.valueOf(i));
             }
-            Fn.SystemPrintLn(Arrays.toString(hourValues));
             hour_picker.setDisplayedValues(hourValues);
             alertDialog.setView(view);
             alertDialog.setCancelable(false);
-//            alertDialog.setTitle(Constants.Title.BOOKING_DATETIME);
             next_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,16 +59,6 @@ public class EstimatedDayDialog extends DialogFragment {
                     Fn.putPreference(getActivity(), Constants.Keys.BOOKING_HOUR, String.valueOf(booking_hour));
                     ConfirmBookingDialog  requestDriver = new ConfirmBookingDialog();
                     requestDriver.show(getActivity().getFragmentManager(), "ABC");
-                   /* FragmentManager fragmentManager = FullActivity.fragmentManager;
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    Fragment fragment = new ConfirmBooking();
-                    transaction.replace(R.id.main_content, fragment, Constants.Config.CURRENT_FRAG_TAG);
-                    if ((FullActivity.homeFragmentIndentifier == -5)) {
-                        FullActivity.homeFragmentIndentifier = transaction.commit();
-                    } else {
-                        transaction.commit();
-//                        Fn.logD("fragment instanceof Book", "homeidentifier != -1");
-                    }*/
                     dialog.dismiss();
                 }
             });
@@ -86,7 +73,6 @@ public class EstimatedDayDialog extends DialogFragment {
                 public boolean onKey(DialogInterface arg0, int keyCode, KeyEvent event) {
                     // TODO Auto-generated method stub
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        //alertDialog.dismiss();
 //                    ((MainActivity)context).moveTaskToBack(true);
                         android.os.Process.killProcess(android.os.Process.myPid());
                         System.exit(1);

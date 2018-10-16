@@ -45,17 +45,14 @@ public class EstimatedTimeDialog  extends DialogFragment {
             minute_picker.setMinValue(0);
             minute_picker.setWrapSelectorWheel(true);
             String[] minuteValues = new String[12];
-            Fn.SystemPrintLn("minute_array_length"+String.valueOf(minuteValues.length));
             for (int i = 0; i < minuteValues.length; i++) {
                 String number = Integer.toString(i*Constants.Config.MINUTE_PICKER_SLAB);
                 minuteValues[i] = number.length() < 2 ? "0" + number : number;
-//                Fn.SystemPrintLn("index: "+String.valueOf(i));
             }
             Fn.SystemPrintLn(Arrays.toString(minuteValues));
             minute_picker.setDisplayedValues(minuteValues);
             alertDialog.setView(view);
             alertDialog.setCancelable(false);
-//            alertDialog.setTitle(Constants.Title.BOOKING_DATETIME);
             next_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,16 +67,6 @@ public class EstimatedTimeDialog  extends DialogFragment {
                     }
                     ConfirmBookingDialog  requestDriver = new ConfirmBookingDialog();
                     requestDriver.show(getActivity().getFragmentManager(), "ABC");
-                   /* FragmentManager fragmentManager = FullActivity.fragmentManager;
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    Fragment fragment = new ConfirmBooking();
-                    transaction.replace(R.id.main_content, fragment, Constants.Config.CURRENT_FRAG_TAG);
-                    if ((FullActivity.homeFragmentIndentifier == -5)) {
-                        FullActivity.homeFragmentIndentifier = transaction.commit();
-                    } else {
-                        transaction.commit();
-//                        Fn.logD("fragment instanceof Book", "homeidentifier != -1");
-                    }*/
                     dialog.dismiss();
                 }
             });

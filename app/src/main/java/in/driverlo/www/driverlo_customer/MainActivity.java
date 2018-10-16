@@ -123,20 +123,16 @@ public class MainActivity extends AppCompatActivity {
 
     protected void LoginSuccess(String response) {
         if(this !=  null) {
-            Fn.logD("COMPLETED_RATING_FRAGMENT_LIFECYCLE", "rate_Driver Called");
-            try {
+             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String errFlag = jsonObject.getString("errFlag");
                 String errMsg = jsonObject.getString("errMsg");
                 if(errFlag.equals("0")){
-//                    Fn.Toast(this,errMsg);
                     if(jsonObject.has("likes")) {
                         JSONArray jsonArray = jsonObject.getJSONArray("likes");
-                        Fn.logD("toastdone", "toastdone");
                         int count = 0;
                         while (count < jsonArray.length())
                         {
-                            Fn.logD("likes_entered", "likes_entered");
                             JSONObject JO = jsonArray.getJSONObject(count);
                             String customer_token = JO.getString(Constants.Keys.CUSTOMER_TOKEN);
                             String mobile_no = JO.getString(Constants.Keys.MOBILE_NO);

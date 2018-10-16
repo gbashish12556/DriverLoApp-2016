@@ -62,17 +62,15 @@ public class RideHistory extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Fn.SystemPrintLn("***Finished Volley request first time****");
+
         createRequest(0);
         list.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page) {
-                Fn.SystemPrintLn("*****page on loadMore: " + page);
                 createRequest(page);
                 //return true;
             }
         });
-        Fn.logW("FINISHED_BOOKING_FRAGMENT_LIFECYCLE", "onActivityCreated called");
     }
 
     private void createRequest(final int page_no){
@@ -90,9 +88,6 @@ public class RideHistory extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
-                            Fn.logD("error", ": volley request failed for FINISHED_BOOKING_FRAGMENT");
-//                        ErrorDialog(Constants.Title.NETWORK_ERROR,Constants.Message.NETWORK_ERROR);
                             Fn.ToastShort(getActivity(), Constants.Message.NETWORK_ERROR);
                         }
                     }) {
@@ -101,7 +96,6 @@ public class RideHistory extends Fragment {
                     HashMap<String, String> params = new HashMap<String, String>();
                     params.put("customer_token", customer_token);
                     params.put("page_no", String.valueOf(page_no));
-//                Fn.logD("user_token",user_token);
                     return Fn.checkParams(params);
                 }
             };
@@ -113,7 +107,6 @@ public class RideHistory extends Fragment {
     private void uiUpdate(String response)
     {
         if(getActivity() !=  null) {
-            System.out.println("******FINISHED response :::: " + response);
             try {
                     String errFlag;
                     String errMsg;
@@ -121,7 +114,6 @@ public class RideHistory extends Fragment {
                     errFlag = jsonObject.getString("errFlag");
                     errMsg = jsonObject.getString("errMsg");
                     if(errFlag.equals("0")){
-                        Fn.logD("response errflag and errMsg", errFlag + " " + errMsg);
                         JSONObject UpdationObject;
                         JSONArray jsonArray;
                         if (jsonObject.has("likes")) {
@@ -130,13 +122,9 @@ public class RideHistory extends Fragment {
                             while (count < jsonArray.length()) {
                                 UpdationObject = jsonArray.getJSONObject(count);
                                 HashMap<String, String> qvalues = new HashMap<String, String>();
-                                Fn.logD("brn_no and datetime1 recieved ", UpdationObject.get("brn_no").toString() + UpdationObject.get("booking_datetime").toString());
                                 qvalues.put("brn_no", UpdationObject.get("brn_no").toString());
-    //                            qvalues.put("vehicle_type", Fn.VehicleName(UpdationObject.get("vehicletype_id").toString(), getActivity()));
-    //                            qvalues.put("datetime1", Fn.getDateName(UpdationObject.get("datetime1").toString()));
-                                qvalues.put("booking_datetime", Fn.getDisplayDate(UpdationObject.get("booking_datetime").toString()));
+                                 qvalues.put("booking_datetime", Fn.getDisplayDate(UpdationObject.get("booking_datetime").toString()));
                                 qvalues.put("vehicle_type", Fn.getUpperCase(UpdationObject.get("vehicle_type").toString()) + " - " + Fn.getUpperCase(UpdationObject.get("vehicle_mode").toString()));
-    //                            qvalues.put("vehicle_image", Integer.toString(Fn.getVehicleImage(Integer.parseInt(UpdationObject.get("vehicletype_id").toString()))));
                                 qvalues.put("booking_status", Fn.getBookingStatus(UpdationObject.get("is_completed").toString()
                                         , UpdationObject.get("is_cancelled").toString()
                                         , UpdationObject.get("is_approved").toString()));
@@ -152,64 +140,45 @@ public class RideHistory extends Fragment {
 
             } catch (Exception e) {
                 // handle exception
-                Fn.logE("log_tag", "Error parsing data " + e.toString());
             }
             ((BaseAdapter) listAdapter).notifyDataSetChanged();
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Fn.logD("Clicked at position :", String.valueOf(position));
+
                     View child_view = list.getChildAt(position - list.getFirstVisiblePosition());
-                    Fn.logD("Child View  :", String.valueOf(child_view));
                     TextView brn_no = (TextView) child_view.findViewById(R.id.brn_no);
-//                String PhoneNum = number.getText().toString();
-                    Fn.logD("onItemClick", "list clicked at position: " + position + " value brn_no =" + brn_no.getText());
-//                Fragment fragment = new Fragment();
                     Fragment fragment = new RideDetails();
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.Keys.BRN_NO, brn_no.getText().toString());
                     fragment.setArguments(Fn.CheckBundle(bundle));
                     FragmentManager fragmentManager = FullActivity.fragmentManager;
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
-//                Fragment fragment = new BookNow();
                     transaction.replace(R.id.main_content, fragment, Constants.Config.CURRENT_FRAG_TAG);
                     if ((FullActivity.homeFragmentIndentifier == -5)) {
                         transaction.addToBackStack(null);
                         FullActivity.homeFragmentIndentifier = transaction.commit();
                     } else {
                         transaction.commit();
-                        Fn.logD("fragment instanceof Book", "homeidentifier != -1");
                     }
-//                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_finished_booking_detail_fragment);
-
                 }
             });
-        }
-    }
-    private void ErrorDialog(String Title,String Message){
-        if(getActivity() !=  null) {
-            Fn.showDialog(getActivity(), Title, Message);
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        requestQueue.stop();
         Fn.stopAllVolley(requestQueue);
-        Fn.logW("FINISHED_BOOKING_FRAGMENT_LIFECYCLE", "onPause Called");
     }
     @Override
     public void onResume() {
         super.onResume();
         Fn.startAllVolley(requestQueue);
-        //requestQueue.start();
-        Fn.logW("FINISHED_BOOKING_FRAGMENT_LIFECYCLE", "onResume Called");
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         Fn.cancelAllRequest(requestQueue, TAG);
-        Fn.logW("FINISHED_BOOKING_FRAGMENT_LIFECYCLE", "onDestroyView Called");
     }
 }
