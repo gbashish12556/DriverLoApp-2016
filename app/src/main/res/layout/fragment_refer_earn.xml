@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/LightGrey"
+    tools:context=".ReferEarn">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:src="@drawable/abc_refer_cover"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/small_text_size"
+                android:gravity="center"
+                android:text="Your Referal Code"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="15dp"
+                android:id="@+id/referal_code"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/semi_large_text_size"
+                android:textStyle="bold"
+                android:text="9999999999" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textSize="@dimen/semi_medium_text_size"
+                android:text="@string/referal_code_text"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="@dimen/semi_large_text_size"
+                android:id="@+id/points_earned"
+                android:text="Points Earned: 000"/>
+            <Button
+                style="@style/full_screen_button"
+                android:layout_marginTop="20dp"
+                android:id="@+id/start_inviting"
+                android:text="Start Inviting"/>
+            <Button
+                style="@style/full_screen_button"
+                android:layout_marginTop="20dp"
+                android:id="@+id/apply_referal_code"
+                android:text="Apply Referral Code"/>
+        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

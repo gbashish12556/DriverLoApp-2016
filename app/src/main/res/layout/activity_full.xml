@@ -1,0 +1,24 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.driverlo.www.driverlo_customer.FullActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_content">
+
+    </FrameLayout>
+    <ListView
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/dark_green"
+        android:id="@+id/nav_menu"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="0dp"
+        >
+    </ListView>
+</android.support.v4.widget.DrawerLayout>

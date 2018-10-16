@@ -1,0 +1,143 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+     style="@style/horizontal_LL.sm.1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp"
+            android:background="@color/dark_green"
+            android:textStyle="bold"
+            android:textColor="@color/pure_white"
+            android:gravity="center"
+            android:text="Select Car Type"/>
+    </LinearLayout>
+    <LinearLayout
+    style="@style/horizontal_LL.sm.6">
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            style="@style/vertical_LL"
+            android:layout_height="wrap_content">
+            <LinearLayout
+            style="@style/list_view">
+                <ImageView
+                  style="@style/vertical_LL.sm.2"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp"
+                    android:src="@drawable/ic_hatchback" />
+                <TextView
+                    style="@style/vertical_LL.sm.4"
+                    android:paddingLeft="10sp"
+                    android:text="Hatchback"/>
+                <RadioButton android:id="@+id/hatchback"
+                    style="@style/vertical_LL.sm.1"
+                    android:checked="true" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/dark_green" />
+            <LinearLayout
+                style="@style/list_view">
+                <ImageView
+                    style="@style/vertical_LL.sm.2"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp"
+                    android:src="@drawable/ic_sedan"/>
+                <TextView
+                    style="@style/vertical_LL.sm.4"
+                    android:paddingLeft="10sp"
+                    android:text="Sedan"/>
+                <RadioButton android:id="@+id/sedan"
+                    style="@style/vertical_LL.sm.1" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/dark_green" />
+            <LinearLayout
+                style="@style/list_view">
+                <ImageView
+                    style="@style/vertical_LL.sm.2"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp"
+                    android:src="@drawable/ic_suv"/>
+                <TextView
+                    style="@style/vertical_LL.sm.4"
+                    android:paddingLeft="10sp"
+                    android:text="Suv"/>
+                <RadioButton android:id="@+id/suv"
+                    style="@style/vertical_LL.sm.1" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/dark_green" />
+            <LinearLayout
+                style="@style/list_view">
+                <ImageView
+                    style="@style/vertical_LL.sm.2"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp"
+                    android:src="@drawable/ic_luxary"/>
+                <TextView
+                    style="@style/vertical_LL.sm.4"
+                    android:paddingLeft="10sp"
+                    android:text="Luxary/Premium"/>
+                <RadioButton android:id="@+id/luxury"
+                    style="@style/vertical_LL.sm.1" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/dark_green" />
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        style="@style/list_view"
+        android:id="@+id/lower_view"
+        android:visibility="visible">
+        <LinearLayout
+            style="@style/vertical_LL"
+            android:gravity="center">
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/horizontal_LL.sm.1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <RadioButton android:id="@+id/manual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:button="@drawable/abc_radiobutton_manual" />
+                <RadioButton android:id="@+id/automatic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/abc_radiobutton_automatic" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/dark_green" />
+    <LinearLayout
+        style="@style/horizontal_LL.sm.1">
+        <Button
+            style="@style/flat_button"
+            android:text="@string/Cancel"
+            android:id="@+id/cancel_button" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/middle_green" />
+        <Button
+            style="@style/flat_button"
+            android:text="@string/Next"
+            android:id="@+id/next_button" />
+    </LinearLayout>
+</LinearLayout>

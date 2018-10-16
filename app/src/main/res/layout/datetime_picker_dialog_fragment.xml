@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        style="@style/horizontal_LL.sm.1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp"
+            android:background="@color/dark_green"
+            android:textStyle="bold"
+            android:textColor="@color/pure_white"
+            android:gravity="center"
+            android:text="Select Booking Date&amp;Time"/>
+     </LinearLayout>
+    <LinearLayout
+        style="@style/highlighted_picker"
+        android:background="@color/LightGrey">
+        <DatePicker
+            style="@android:style/Widget.DatePicker"
+            android:datePickerMode="spinner"
+            android:id="@+id/date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <LinearLayout
+        style="@style/highlighted_picker"
+        android:background="@color/LightGrey">
+        <TimePicker
+            android:timePickerMode="spinner"
+            android:id="@+id/time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <LinearLayout
+        style="@style/horizontal_LL.sm.1">
+        <Button
+            style="@style/flat_button"
+            android:text="@string/Cancel"
+            android:id="@+id/cancel_button" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/middle_green" />
+        <Button
+            style="@style/flat_button"
+            android:text="@string/Next"
+            android:id="@+id/next_button" />
+    </LinearLayout>
+</LinearLayout>

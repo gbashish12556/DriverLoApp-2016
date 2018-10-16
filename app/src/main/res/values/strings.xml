@@ -1,0 +1,172 @@
+<resources>
+
+    <!-- Random Strings-->
+    <string name="app_name">Driver Lo</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">LOGIN</string>
+    <string name="title_activity_full">Hire Driver</string>
+    <string name="title_hire_driver_fragment">Hire Driver</string>
+    <string name="title_ride_history_fragment">Ride History</string>
+    <string name="title_fare_chart_fragment">Fare Chart</string>
+    <string name="title_contact_us_fragment">Contact Us</string>
+    <string name="title_about_us_fragment">About Us</string>
+    <string name="title_terms_fragment">T&amp;C</string>
+
+    <!--Google Services-->
+    <string name="gcm_senderID">driverloapp</string>
+    <string name="google_app_id">driverloapp</string>
+    <!-- ashish.gupta@truebil.com (test project Android key)-->
+    <string name="app_APIkey">AIzaSyAORe_4a7T3aUw7mrZ6GLsz0xach0Ob3f8</string>
+    <string name="server_APIkey1">AIzaSyBG-80WXPpEWytK_4YKPIRa6VJ80WFZh_A</string>
+
+    <!--Google Services-->
+    <!-- <string name="gcm_senderID">290729759682</string>
+   <string name="google_app_id">290729759682</string>
+   <string name="app_APIkey">AIzaSyD9NxvrznPn9WyeWJ1zVEZTfwkz-PYSokg</string>
+   <string name="server_APIkey1">AIzaSyCF9AFjZ4WcXAH6Qgpxm3VjgjoeuyGAADE</string>-->
+
+    <!--terms-->
+    <string name="terms1">All bookings have to be made at least 5 hrs in advance for proper facilitation of the service. A successful booking alone does not qualify for a service confirmation. Each booking will be followed up with a confirmation call or SMS to your registered mobile number depending on availability of drivers and proximity of reporting location.</string>
+    <string name="terms2">All our drivers are under contractual agreement with the company not to solicit our customers directly or indirectly for any driver services. Also our customers are obligated not to employ any drivers of Driver-Lo on permanent or temporary basis without the consent of the company.</string>
+    <string name="terms3">Any cancellation of a booking by the customer has to be made 2 hours prior to the start of the booking. Otherwise a cancellation charge of Rs. 100/- will be applicable.</string>
+    <string name="terms4">Rates quoted are only indicative and are not binding on the company.</string>
+    <string name="terms5">Please do not insist and/or encourage the driver for over speeding, jumping traffic signals, driving in wrong lane/side, overtaking, offroading, race/competition etc.</string>
+    <string name="terms6">We strictly recommend NOT to leave any cash, valuables, precious items like laptops, mobiles, wallets, handbags, luggage etc in the vehicle and/or in possession of the drivers.</string>
+    <string name="terms7">Driver-Lo or any driver engaged through it will NOT be responsible for any loss, theft or damage.</string>
+    <string name="terms8">Please insist the driver to display the company duty slip(CSR GROUP SERVICES) every time the driver reports for your booking. </string>
+    <string name="terms9">In case you have any suspicion or doubt you should always call the DriveR-Lo call center number to report and/or clarify.</string>
+    <string name="terms10">We accept payments ONLY in cash and should be made by the customer directly to the driver at the end of the booking.</string>
+    <string name="terms11">Driver-Lo or its management and its driver do not hold any responsibility for loss and /or damage of your vehicle and/or your and the occupants life including theft, sabotage, kidnapping etc.</string>
+    <string name="terms12">You should engage Driver-Lo services ONLY if your vehicle is covered under a comprehensive insurance through a credible motor vehicle insurer in India as Driver-Lo or its driver would not be a party, convict or witness to any legal proceedings held by any court of Law due to such incidents, loss or thefts.</string>
+    <string name="terms13">Management is not responsible in case of any incidents if you hire a driver directly without office intimation.</string>
+    <string name="terms14">Driver-Lo and its management including the driver hold the full right to accept or decline any booking at its discretion and judgement.</string>
+    <string name="terms15">Please do not support, insist and/or encourage the driver to drive the vehicle under any influence of alcohol, drugs etc. as the responsibility of doing so is totally borne by you and not DriverLo and its driver.</string>
+    <string name="terms16">Though DriverLo will make the best case effort to provide a driver at requested booking time, the driver is subject to availability.</string>
+    <string name="terms17"> For any grievance or complaints you can contact us at our call center or our support email address.</string>
+    <!--Fetch Address-->
+    <string name="no_geocoder_available">No geocoder available</string>
+    <string name="fetch_address">Fetch address</string>
+    <string name="address_found">Address found</string>
+    <string name="no_address_found">Sorry, no address found</string>
+    <string name="no_location_data_provided">No location data provided</string>
+    <string name="service_not_available">Sorry, the service is not available</string>
+    <string name="invalid_lat_long_used">Invalid lattitude or longitude used</string>
+
+    <!--Messaqges-->
+    <string name="GPSAlertDialogTitle">GPS LOCATION SETTING</string>
+    <string name="GPSAlertDialogMessage">Your GPS location is not enabled</string>
+    <string name="NetworkAlertDialogTitle">NETWORK SETTING</string>
+    <string name="NetworkAlertDialogMessage">Your Internet is not enabled</string>
+    <string name="LogoutAlertDialogTitle">LOGOUT</string>
+    <string name="LogoutAlertDialogMessage">Do you want to logout ?</string>
+    <string name="Next">Next</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="Ok">Ok</string>
+    <string name="hide">Hide</string>
+    <string name="show">Show</string>
+    <string name="drawer_open">Open Nav Drawer</string>
+    <string name="drawer_close">Close Nav Drawer</string>
+    <string name="send_to">Share app link to:</string>
+    <string name="support_mobile">(033)-26655544</string>
+    <string name="support_email">Driverlo.in@gmail.com</string>
+    <string name="ride_detail">Ride Detail</string>
+    <string name="driver_detail">Driver Detail</string>
+
+    <!--Edit text Placeholder hint-->
+    <string name="hint_mobile_no">10 Digit Mobile No</string>
+    <string name="hint_referral_code">Referral Code</string>
+    <string name="hint_name">Your Name</string>
+    <string name="hint_email">Your Email</string>
+    <string name="hint_postal_address">Your Address</string>
+    <string name="hint_otp">6 Digit OTP</string>
+    <string name="hint_password">Enter Password</string>
+    <string name="hint_repassword">Re-Enter Password</string>
+    <string name="hint_pickup_point">Enter Pickup Point</string>
+    <string name="hint_dropoff_point">Enter Dropoff Point</string>
+
+    <!--General fares-->
+    <string name="general_fare">One-way charge of Rs 100</string>
+    <string name="night_charge">Night time charge of Rs 150 &#xA; For drives ending between 10pm to 6am</string>
+    <string name="outstation_general_fare">\@ Rs. 1199 for min 24 hrs</string>
+    <string name="outstation_fare">Pay Rs. 599 for additional 12 hrs</string>
+    <string name="service_tax">Service tax as applicable</string>
+    <string name="referal_code_text">Your friend get 200 points on signup with your &#xA; referral code &amp; you get 100 points for every friend &#xA; who uses DriverLo</string>
+    <string name="bullet_symbol">\u2022</string>
+    <!--Button Text-->
+    <string name="button_text_registration">REGISTER</string>
+    <string name="button_text_OtpVerification">VERIFY OTP</string>
+    <string name="button_text_update">UPDATE</string>
+    <string name="button_text_book_now">BOOK NOW</string>
+    <string name="button_text_book_later">BOOK LATER</string>
+
+    <string name="button_text_cancel">CANCEL</string>
+    <string name="button_text_ok">OK</string>
+    <string name="button_text_confirm_booking">CONFIRM BOOKING</string>
+    <string name="button_text_get_quote">GET QUOTE</string>
+    <string name="button_text_login">LOGIN</string>
+    <string name="button_text_signup">SIGNUP</string>
+    <string name="button_text_submit">SUBMIT</string>
+    <string name="button_text_verify_otp">VERIFY OTP</string>
+
+    <!-- Titles of activities and fragments-->
+    <string name="title_activity_signup">SignUp</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_forgot_password">Forgot Password</string>
+    <string name="title_fragment_refer_earn">Refer&amp;Earn</string>
+    <string name="title_fragment_hire_driver">Hire Driver</string>
+    <string name="title_fragment_ride_history">Ride History</string>
+    <string name="title_fragment_far_chart">Fare Chart</string>
+    <string name="title_fragment_contact_us">Contact Us</string>
+    <string name="title_fragment_terms">Terms&amp;Constions</string>
+    <string name="title_fragment_logout">Logout</string>
+    <!--Random Text-->
+    <string name="forgot_password"><b><u>Forgot Password?</u></b></string>
+    <string name="new_user"><b><u>New User</u></b></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_otp_verification">OtpVerification</string>
+
+    <!--NAVIGATION DRAWER-->
+    <string-array name="nav_menu">
+        <item>Hire Driver</item>
+        <item>Ride History</item>
+        <item>Fare Chart</item>
+        <item>Contact Us</item>
+        <item>T&amp;C</item>
+        <item>Refer&amp;Earn</item>
+        <item>Logout</item>
+    </string-array>
+
+    <!--NAVIGATION DRAWER-->
+    <string-array name="title_menu">
+        <item>Hire Driver</item>
+        <item>Ride History</item>
+        <item>Fare Chart</item>
+        <item>Contact Us</item>
+        <item>T&amp;C</item>
+        <item>Refer&amp;Earn</item>
+        <item>Logout</item>
+    </string-array>
+    <!--JOURNEY TYPE-->
+    <string-array name="journey_type">
+        <item>roundtrip</item>
+        <item>oneway</item>
+        <item>outstation</item>
+    </string-array>
+    <!--VEHICLE TYPE-->
+    <string-array name="vehicle_type">
+        <item>hatchback</item>
+        <item>sedan</item>
+        <item>suv</item>
+        <item>luxary</item>
+    </string-array>
+    <!--VEHICLE TYPE-->
+    <string-array name="vehicle_mode">
+        <item>manual</item>
+        <item>automatic</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+</resources>
