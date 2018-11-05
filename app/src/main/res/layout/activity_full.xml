@@ -3,7 +3,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.driverlo.www.driverlo_customer.FullActivity">
+    tools:context="in.driverlo.www.driverlo_customer.Activities.CompleteActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -11,6 +11,7 @@
         android:id="@+id/main_content">
 
     </FrameLayout>
+
     <ListView
         android:layout_width="240dp"
         android:layout_height="match_parent"
@@ -21,4 +22,5 @@
         android:dividerHeight="0dp"
         >
     </ListView>
+
 </android.support.v4.widget.DrawerLayout>

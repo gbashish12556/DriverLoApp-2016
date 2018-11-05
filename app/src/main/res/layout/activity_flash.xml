@@ -4,5 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/abc_flash_cover"
-    tools:context="in.driverlo.www.driverlo_customer.FlashActivity">
+    tools:context="in.driverlo.www.driverlo_customer.Activities.FlashActivity">
 </FrameLayout>

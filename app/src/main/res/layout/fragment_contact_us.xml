@@ -4,48 +4,62 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/LightGrey"
-    tools:context="in.driverlo.www.driverlo_customer.ContactUs">
+    tools:context="in.driverlo.www.driverlo_customer.Fragments.ContactUs">
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Please contact us on the following for any queries - " />
+
     <LinearLayout
         style="@style/horizontal_LL.sm.8"
         android:padding="10dp"
         android:orientation="horizontal">
+
         <LinearLayout
             style="@style/vertical_LL">
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.1"
                 android:padding="5dp">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_support"
                     android:padding="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/support_mobile"/>
+
             </LinearLayout>
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.1"
                 android:padding="5dp">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_web_grey"
                     android:padding="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/support_email"/>
+
             </LinearLayout>
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.5"></LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

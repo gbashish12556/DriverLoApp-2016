@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         style="@style/horizontal_LL.sm.2"
         android:layout_marginTop="5dp">
+
          <TextView
              style="@style/vertical_LL.sm.3"
              android:background="@color/dark_green"
@@ -15,6 +17,7 @@
              android:textColor="@color/pure_white"
              android:text="Roundtrip"
              android:id="@+id/journey_type"/>
+
         <TextView
             style="@style/vertical_LL.sm.4"
             android:gravity="center"
@@ -23,16 +26,21 @@
             android:padding="5dp"
             android:text="17th Nov, 2016 @ 4:35 pm"
             android:id="@+id/booking_datetime"/>
+
     </LinearLayout>
+
     <LinearLayout
         style="@style/horizontal_LL.sm.8"
         android:padding="20dp">
+
         <LinearLayout
            style="@style/vertical_LL">
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.1"
                 android:layout_marginTop="@dimen/confirm_booking_text_margin"
                 android:id="@+id/pickup_location_container">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -40,19 +48,24 @@
                     android:paddingTop="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="20dp"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/semi_medium_text_size"
                     android:id="@+id/pickup_location"
                     android:text="Salkia, Howrah">
+
                 </TextView>
+
             </LinearLayout>
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.1"
                 android:layout_marginTop="@dimen/confirm_booking_text_margin"
                 android:id="@+id/dropoff_location_container"
                 android:visibility="gone">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,61 +73,80 @@
                     android:paddingTop="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="20dp"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/semi_medium_text_size"
                     android:id="@+id/dropoff_location"
                     android:text="Saltlake, Kolkata">
+
                 </TextView>
+
             </LinearLayout>
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.1"
                 android:layout_marginTop="@dimen/confirm_booking_text_margin">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_booking_status"
                     android:layout_gravity="top"
                     android:paddingRight="10dp"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/semi_medium_text_size"
                         android:id="@+id/estimated_time"
                         android:text="5 Hour 10 minute">
+
                     </TextView>
+
             </LinearLayout>
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.1"
                 android:layout_marginTop="@dimen/confirm_booking_text_margin">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_car"
                     android:layout_gravity="top"
                     android:paddingRight="10dp"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/semi_medium_text_size"
                     android:id="@+id/vehicle_type"
                     android:text="Manual-Suv">
+
                 </TextView>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/dark_green"/>
+
     <LinearLayout
         style="@style/horizontal_LL.sm.6"
         android:padding="20dp">
+
         <LinearLayout
             style="@style/vertical_LL"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
+
             <TextView
                 style="@style/horizontal_LL.sm.2"
                 android:textStyle="bold"
@@ -123,7 +155,9 @@
                 android:textColor="@color/dark_green"
                 android:id="@+id/estimated_fare"
                 android:text="Rs 200">
+
            </TextView>
+
             <TextView
                 style="@style/horizontal_LL.sm.2"
                 android:gravity="center"
@@ -131,12 +165,15 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/opacity_gray"
                 android:text="This is just an estimate, actual fare will be calculated after the drive">
+
             </TextView>
+
             <LinearLayout
                 style="@style/horizontal_LL.sm.2"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:weightSum="1">
+
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
@@ -144,14 +181,21 @@
                     android:hint="Promo Code"
                     android:id="@+id/promo_code"
                     android:layout_weight="0.50" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+
     <LinearLayout
         style="@style/horizontal_LL.sm.3">
+
         <Button
             style="@style/full_screen_button"
             android:text="Request Driver"
             android:id="@+id/request_driver"/>
+
     </LinearLayout>
+
 </LinearLayout>

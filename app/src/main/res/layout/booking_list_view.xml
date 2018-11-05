@@ -6,8 +6,10 @@
     android:layout_margin="10dp"
     android:padding="10dp"
     android:background="@color/pure_white">
+
         <LinearLayout
             style="@style/horizontal_LL.sm.2">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -17,6 +19,7 @@
                 android:textSize="@dimen/semi_medium_text_size"
                 android:id="@+id/brn_no"
                 android:text="BRN13948275638"/>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -25,9 +28,12 @@
                 android:textSize="@dimen/semi_medium_text_size"
                 android:id="@+id/booking_datetime"
                 android:text="12/11/2016 5:30 pm"/>
+
         </LinearLayout>
+
         <LinearLayout
              style="@style/horizontal_LL.sm.2">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -36,6 +42,7 @@
                 android:textSize="@dimen/semi_medium_text_size"
                 android:id="@+id/journey_type"
                 android:text="Roundtrip"/>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -44,6 +51,7 @@
                 android:textSize="@dimen/semi_medium_text_size"
                 android:id="@+id/vehicle_type"
                 android:text="Suv-Manual"/>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -52,9 +60,12 @@
                 android:textSize="@dimen/semi_medium_text_size"
                 android:id="@+id/booking_status"
                 android:text="Completed"/>
+
         </LinearLayout>
+
         <LinearLayout
             style="@style/horizontal_LL.sm.1">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,5 +73,7 @@
                 android:textSize="@dimen/small_text_size"
                 android:id="@+id/pickup_point"
                 android:text="Salkia, Howrah, Westbengal-711202"/>
+
         </LinearLayout>
+
 </LinearLayout>

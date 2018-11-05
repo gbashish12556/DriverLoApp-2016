@@ -4,8 +4,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+
     <LinearLayout
         style="@style/horizontal_LL.sm.1">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -16,26 +18,34 @@
             android:textColor="@color/pure_white"
             android:gravity="center"
             android:text="Estimated Usage"/>
+
     </LinearLayout>
+
     <LinearLayout
         style="@style/horizontal_LL.sm.3"
         android:paddingRight="5sp"
         android:paddingLeft="5sp">
+
         <LinearLayout
             style="@style/vertical_LL.sm.1">
+
             <NumberPicker
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:targetApi="honeycomb"
                 android:id="@+id/day_picker"></NumberPicker>
+
         </LinearLayout>
+
         <LinearLayout
             style="@style/vertical_LL.sm.3"
             android:gravity="center">
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="#66afe9" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,26 +53,34 @@
                 android:paddingBottom="10sp"
                 android:gravity="center"
                 android:text="Day"/>
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="#66afe9" />
+
         </LinearLayout>
+
         <LinearLayout
             style="@style/vertical_LL.sm.2">
+
             <NumberPicker
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:targetApi="honeycomb"
                 android:id="@+id/hour_picker"></NumberPicker>
+
         </LinearLayout>
+
         <LinearLayout
             style="@style/vertical_LL.sm.3"
             android:gravity="center">
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="#66afe9" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,30 +88,40 @@
                 android:paddingBottom="10sp"
                 android:gravity="center"
                 android:text="Hour"/>
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="#66afe9" />
+
         </LinearLayout>
+
     </LinearLayout>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="@color/dark_green" />
+
     <LinearLayout
         style="@style/horizontal_LL.sm.1">
+
         <Button
             style="@style/flat_button"
             android:text="@string/Cancel"
             android:id="@+id/cancel_button" />
+
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/middle_green" />
+
         <Button
             style="@style/flat_button"
             android:text="@string/Next"
             android:id="@+id/next_button" />
+
     </LinearLayout>
+
 </LinearLayout>

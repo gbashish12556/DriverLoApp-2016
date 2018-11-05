@@ -15,6 +15,7 @@
     <!--Google Services-->
     <string name="gcm_senderID">driverloapp</string>
     <string name="google_app_id">driverloapp</string>
+
     <!-- ashish.gupta@truebil.com (test project Android key)-->
     <string name="app_APIkey">AIzaSyAORe_4a7T3aUw7mrZ6GLsz0xach0Ob3f8</string>
     <string name="server_APIkey1">AIzaSyBG-80WXPpEWytK_4YKPIRa6VJ80WFZh_A</string>
@@ -43,6 +44,7 @@
     <string name="terms15">Please do not support, insist and/or encourage the driver to drive the vehicle under any influence of alcohol, drugs etc. as the responsibility of doing so is totally borne by you and not DriverLo and its driver.</string>
     <string name="terms16">Though DriverLo will make the best case effort to provide a driver at requested booking time, the driver is subject to availability.</string>
     <string name="terms17"> For any grievance or complaints you can contact us at our call center or our support email address.</string>
+
     <!--Fetch Address-->
     <string name="no_geocoder_available">No geocoder available</string>
     <string name="fetch_address">Fetch address</string>
@@ -150,12 +152,14 @@
         <item>Refer&amp;Earn</item>
         <item>Logout</item>
     </string-array>
+
     <!--JOURNEY TYPE-->
     <string-array name="journey_type">
         <item>roundtrip</item>
         <item>oneway</item>
         <item>outstation</item>
     </string-array>
+
     <!--VEHICLE TYPE-->
     <string-array name="vehicle_type">
         <item>hatchback</item>
@@ -163,10 +167,12 @@
         <item>suv</item>
         <item>luxary</item>
     </string-array>
+
     <!--VEHICLE TYPE-->
     <string-array name="vehicle_mode">
         <item>manual</item>
         <item>automatic</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+
 </resources>
